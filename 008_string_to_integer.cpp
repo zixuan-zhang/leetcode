@@ -43,7 +43,7 @@ public:
 
         int index = 0;
         while (index < len && str[index] == ' ')
-            index ++;
+            index ++; // strip space character
 
         if (index >= len)
             return 0; // error & "   " case
@@ -52,7 +52,7 @@ public:
         if ('-' == str[index])
             negFlag = true;
         else if ('+' == str[index])
-            negFlag = false;
+            negFlag = false; // + signed
         else if (str[index] >= '0' && str[index] <= '9')
             res = str[index] - '0';
         else
