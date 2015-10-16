@@ -87,19 +87,61 @@ public:
         return result;
 
     }
+
+    vector<vector<int> >threeSum1(vector<int>& nums)
+    {
+        vector<vector<int> > result;
+        vector<int> group(3, 0);
+        sort(nums.begin(), nums.end());
+        int i = 0;
+        while (i < nums.size())
+        {
+            int left = i + 1;
+            int right = nums.size() - 1;
+            int temp;
+            while (left < right)
+            {
+                temp = nums[i] + nums[left] + nums[right];
+                if (temp == 0)
+                {
+                    group[0] = nums[i];
+                    group[1] = nums[left];
+                    group[2] = nums[right];
+                    result.push_back(group);
+                }
+                if (temp > 0)
+                    while (left < --right && nums[right] == nums[right+1]);
+                else if (temp < 0)
+                    while (++left < right && nums[left] == nums[left-1]);
+                else
+                {
+                    while (left < --right && nums[right] == nums[right+1]);
+                    while (++left < right && nums[left] == nums[left-1]);
+                }
+            }
+            while (++i < nums.size() && nums[i] == nums[i-1]);
+        }
+        return result;
+    }
 };
 
 int main()
 {
     Solution s;
     vector<int> S;
+    /*
     S.push_back(-1);
     S.push_back(0);
     S.push_back(1);
     S.push_back(2);
     S.push_back(-1);
     S.push_back(-4);
-    vector<vector<int> > res = s.threeSum(S);
+    */
+    S.push_back(1);
+    S.push_back(2);
+    S.push_back(-2);
+    S.push_back(-1);
+    vector<vector<int> > res = s.threeSum1(S);
     for (int i = 0; i < res.size(); ++i)
     {
         for (int j = 0; j < res[i].size(); j++)
