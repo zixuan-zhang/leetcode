@@ -2,7 +2,7 @@
  *  @File  : 031_next_permutation.cpp
  *  @Author: Zhang Zixuan
  *  @Email : zixuan.zhang.victor@gmail.com
- *  @Blog  : www.noathinker.com
+ *  @Blog  : http://www.noathinker.com
  *  @Date  : 2015年10月31日 星期六 09时49分15秒
  ******************************************************************************/
 
