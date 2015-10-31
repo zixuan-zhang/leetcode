@@ -64,6 +64,11 @@ public:
         return -1;
     }
 
+    /*
+     *
+     * 二分查找的一个变形
+     *
+     */
     int search(vector<int>& nums, int target)
     {
         return rotated_search(nums, 0, nums.size() - 1, target);
