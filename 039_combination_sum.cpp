@@ -30,31 +30,54 @@
 
 using namespace std;
 
+/*
+ * Solution:
+ *
+ * 用递归的方法去考虑这个问题
+ *
+ */
+
 class Solution
 {
 public:
 
+    void print_vector(vector<int> comb)
+    {
+        for (int i = 0; i < comb.size(); ++i)
+            cout<<comb[i]<<" ";
+        cout<<endl;
+    }
+
     void _combination(vector<int>& candidates, int target,
             vector<int>& comb, int start, vector<vector<int> >& result)
     {
-        for (int i = 0; i < candidates.size(); ++i)
+        for (int i = start; i < candidates.size(); ++i)
         {
             if (candidates[i] == target)
             {
                 comb.push_back(candidates[i]);
+                //cout<<"--push: "<<candidates[i]<<"-- stack: ";
+                //print_vector(comb);
                 reverse(comb.begin(), comb.end());
                 result.push_back(comb);
-                for (int j = 0; j < comb.size(); ++j)
-                    cout<<comb[j]<<" ";
-                cout<<endl;
+                reverse(comb.begin(), comb.end());
+                //cout<<"-----result-----"<<endl;
+                //for (int j = 0; j < comb.size(); ++j)
+                    //cout<<comb[j]<<" ";
+                //cout<<endl;
                 comb.pop_back();
+                //cout<<"--pop : "<<candidates[i]<<"-- stack: ";
+                //print_vector(comb);
             }
             else if (candidates[i] < target)
             {
                 comb.push_back(candidates[i]);
-                _combination(candidates, target - candidates[i], comb,
-                        i, result);
+                //cout<<"--push: "<<candidates[i]<<"-- stack: ";
+                //print_vector(comb);
+                _combination(candidates, target - candidates[i], comb, i, result);
                 comb.pop_back();
+                //cout<<"--pop : "<<candidates[i]<<"-- stack: ";
+                //print_vector(comb);
             }
         }
     }
