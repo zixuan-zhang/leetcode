@@ -21,6 +21,11 @@ using namespace std;
 class Solution
 {
 public:
+    /*
+     * Solution:
+     *
+     * DP method
+     */
     bool isMatch(string s, string p)
     {
         int sLen = s.length() + 1;
@@ -49,14 +54,6 @@ public:
                 F[j][0] = false;
         }
 
-        //for (int i = 0; i < pLen; ++i)
-        //{
-            //for (int j = 0; j < sLen; ++j)
-                //cout<<F[i][j]<<" ";
-            //cout<<endl;
-        //}
-        //cout<<endl;
-
         // main process
         for (int i = 0; i < p.length(); ++i)
         {
@@ -76,21 +73,24 @@ public:
                 }
             }
         }
-
-        for (int i = 0; i < pLen; ++i)
-        {
-            for (int j = 0; j < sLen; ++j)
-                cout<<F[i][j]<<" ";
-            cout<<endl;
-        }
         
-        return false;
+        return F[pLen-1][sLen-1];
     }
 };
 
 int main()
 {
-    Solution s;
-    s.isMatch("abbc", "a*b**");
+    //string s = "abbabbbaabaaabbbbbabbabbabbbabbaaabbbababbabaaabbab";
+    //string p = "*aabb***aa**a******aa*";
+    //string s = "aabbbaaabaaabab";
+    //string p = "*aabb*aa*a*aa*";
+    //string s = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba";
+    //string p = "a*******b";
+    //string s = "babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb";
+    //string p = "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a";
+    Solution so;
+    //s.isMatch("abbc", "a*b**");
+    bool result = so.isMatch(s, p);
+    cout<<result<<endl;
     return 0;
 }
