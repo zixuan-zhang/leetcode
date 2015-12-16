@@ -28,6 +28,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -41,6 +42,29 @@ bool cmp(string s1, string s2)
 class Solution
 {
 public:
+
+    /*
+     * This method is good
+     */
+    vector<vector<string> > groupAnagrams1(vector<string>& strs)
+    {
+        vector<vector<string> > result;
+        map<string, vector<string> >m;
+        for (int i = 0; i < strs.size(); ++i)
+        {
+            string temp = strs[i];
+            sort(temp.begin(), temp.end());
+            m[temp].push_back(strs[i]);
+        }
+
+        for (map<string, vector<string> >::iterator it = m.begin();
+                it != m.end(); ++it)
+        {
+            sort(it->second.begin(), it->second.end());
+            result.push_back(it->second);
+        }
+        return result;
+    }
     /*
      * Solution:
      *
@@ -93,7 +117,7 @@ int main()
 
     vector<vector<string> > result;
     Solution s;
-    result = s.groupAnagrams(strs);
+    result = s.groupAnagrams1(strs);
     for (int i = 0; i < result.size(); ++i)
     {
         for (int j = 0; j < result[i].size(); ++j)
