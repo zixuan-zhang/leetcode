@@ -50,9 +50,7 @@ public:
     {
         unordered_map<int, LRUNode*>::iterator it = map.find(key);
         if (it == map.end())
-        {
             return -1;
-        }
         liftNode(it->second);
         return it->second->val;
     }
@@ -66,48 +64,43 @@ public:
                 return ;
             if (current == capacity)
             {
+                map.erase(tail->key);
                 if (tail->pre != NULL)
                 {
                     LRUNode* temp = tail->pre;
                     tail->pre->next = NULL;
-                    map.erase(tail->key);
                     delete tail;
                     tail = temp;
                 }
                 else
                 {
-                    map.erase(tail->key);
                     delete tail;
                     tail = NULL;
                     head = NULL;
                 }
             }
             else
-            {
                 current++;
-            }
+            LRUNode* newNode = new LRUNode(key, value);
             if (current == 1)
             {
-                LRUNode* newNode = new LRUNode(key, value);
+                // First node in link
                 head = newNode;
                 tail = newNode;
-                map[key] = newNode;
             }
             else
             {
-                LRUNode* newNode = new LRUNode(key, value);
                 head->pre = newNode;
                 newNode->next = head;
                 head = newNode;
-                map[key] = newNode;
             }
+            map[key] = newNode;
         }
         else
         {
             it->second->val = value;
             liftNode(it->second);
         }
-        return ;
     }
 
     int display()
@@ -134,27 +127,21 @@ private:
     void liftNode(LRUNode* node)
     {
         if (head == node)
-        {
             return;
-        }
         if (node == tail)
         {
             tail = tail->pre;
             tail->next = NULL;
-            head->pre = node;
-            node->next = head;
-            node->pre = NULL;
-            head = node;
         }
         else
         {
             node->pre->next = node->next;
             node->next->pre = node->pre;
-            head->pre = node;
-            node->next = head;
-            node->pre = NULL;
-            head = node;
         }
+        head->pre = node;
+        node->next = head;
+        node->pre = NULL;
+        head = node;
     }
 
 };
