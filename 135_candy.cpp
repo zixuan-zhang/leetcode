@@ -27,6 +27,10 @@ using namespace std;
 class Solution
 {
 public:
+    /*
+     * Edge cases need to be considered.
+     *
+     */
     int candy(vector<int>& ratings)
     {
         if (ratings.size() == 0)
