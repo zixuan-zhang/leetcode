@@ -69,6 +69,19 @@ public:
         }
         return can_jump[0];
     }
+
+    bool method2(vector<int>& nums)
+    {
+        vector<int> left(nums.size());
+        left[0] = 0;
+        for (int i = 1; i < nums.size(); ++i)
+        {
+            left[i] = max(left[i-1], nums[i-1]) - 1;
+            if (left[i] < 0)
+                return false;
+        }
+        return left[nums.size()-1] >= 0;
+    }
 };
 
 int main()
@@ -82,7 +95,10 @@ int main()
 
     Solution s;
     bool result = s.canJump(nums);
+    bool result2 = s.method2(nums);
     cout<<result<<endl;
+    cout<<result2<<endl;
+    
 
     return 0;
 }
