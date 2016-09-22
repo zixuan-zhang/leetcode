@@ -59,12 +59,35 @@ public:
         _generate(n, n, str, result);
         return result;
     }
+
+    void _method2(int n, int l, int r, vector<string>& result, string comb)
+    {
+        if (l == n && r == n)
+        {
+            result.push_back(comb);
+            return;
+        }
+        if (l < n)
+            _method2(n, l+1, r, result, comb+"(");
+        if (r < l)
+            _method2(n, l, r+1, result, comb+")");
+    }
+
+    vector<string> method2(int n)
+    {
+        vector<string> results;
+        string comb;
+        _method2(n, 0, 0, results, "");
+        return results;
+    }
 };
 
 int main()
 {
     Solution s;
     vector<string> result = s.generateParenthesis(4);
+    vector<string> result2 = s.method2(4);
     cout<<result.size()<<endl;
+    cout<<result2.size()<<endl;
     return 0;
 }
