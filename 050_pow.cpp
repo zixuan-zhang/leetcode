@@ -22,9 +22,7 @@ class Solution {
 public:
     /*
      * method:
-     *
      * 这道题就这么过了，连溢出情况都么有考虑，只稍微做了下加速。
-     *
      */
     double myPow(double x, int n) {
         if (0 == n)
@@ -66,9 +64,32 @@ public:
         long double res = pos == true ? base : 1 / base;
         return res;
     }
+
+    double method2(double x, int n)
+    {
+        bool negative = false;
+        if (n = 0)
+            return 1;
+        if (n < 0)
+        {
+            negative = true;
+            n = 0 - n;
+        }
+        if (n == 1)
+            return x;
+        double res = method2(x, n/2) * method2(x, n/2);
+        if (n & 1)
+            res *= x;
+        if (negative)
+            res = 1 / res;
+        return res; 
+    }
 };
 
 int main()
 {
+    Solution s;
+    double res = s.method2(8.88023, 3);
+    cout<<res<<endl;
     return 0;
 }
