@@ -34,6 +34,7 @@ using namespace std;
 class Solution
 {
 public:
+    /*
     int myAtoi(string str)
     {
         int negFlag = false;
@@ -80,13 +81,57 @@ public:
         else
             return res;
     }
+    */
+    int myAtoi(string str) {
+        // strip all whitespaces
+        int res = 0;
+        int index = 0;
+        while (index < str.length() && str[index] == ' ')
+            index++;
+        if (index >= str.length())
+            return res;
+        bool negative = false;
+        if (str[index] == '-')
+        {
+            negative = true;
+            index++;
+        }
+        else if (str[index] == '+')
+        {
+            negative = false;
+            index++;
+        }
+        else if (str[index] >= '0' && str[index] <= '9')
+            negative = false;
+        else
+            return res;
+        while (index < str.length())
+        {
+            int value = 0;
+            if (str[index] >= '0' && str[index] <= '9')
+            {
+                value = str[index] - '0';
+                if (negative && res > (INT_MIN + value) / -10)
+                    return 0;
+                else if (!negative && (INT_MAX - value) / 10)
+                    return 0;
+                res = res * 10 + value;
+            }
+            else
+                break;
+            index++;
+        }
+        if (negative)
+            res *= -1;
+        return res;
+    }
 };
 
 int main()
 {
     //cout<<INT_MAX<<" "<<INT_MIN<<endl;
     Solution s;
-    string str = "2147483648";
+    string str = "1";
     int res = s.myAtoi(str);
     cout<<res<<endl;
     return 0;

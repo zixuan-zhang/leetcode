@@ -16,6 +16,8 @@
  */
 
 #include <iostream>
+#include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -102,6 +104,32 @@ public:
         }
         return subString;
     }
+
+    string dpSlution(string str)
+    {
+        int len = str.length();
+        vector<vector<int> > matrix(len, vector<int>(len, 0));
+        int start;
+        int size= INT_MIN;
+        for (int i = 0; i < len; ++i)
+        {
+            for (int j = i; j >= 0; --j)
+            {
+                if (i == j)
+                    matrix[j][i] = 1;
+                else if (i - 1 == j)
+                    matrix[j][i] = (str[j] == str[i] ? 1 : 0);
+                else
+                    matrix[j][i] = (str[j] == str[i] && matrix[j+1][i-1]) ? 1 : 0;
+                if (matrix[j][i] && size < i - j + 1)
+                {
+                    start = j;
+                    size = i - j + 1;
+                }
+            }
+        }
+        return str.substr(start, size);
+    }
 };
 
 int main()
@@ -111,7 +139,9 @@ int main()
     string str1 = "abac";
     string str2 = "abb";
     string str3 = "aa";
-    string result  = s.longestPalindrome(str3);
+    string str4 = "aaa";
+    //string result  = s.longestPalindrome(str3);
+    string result = s.dpSlution(str4);
     cout<<result<<endl;
     return 0;
 }
